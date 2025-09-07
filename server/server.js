@@ -11,7 +11,11 @@ const app = express();
 (async () => {
   await connectDB();
 
-  app.use(cors());
+  app.use(cors({
+  origin: ["https://blog-studio-ai2.vercel.app"], // replace with your frontend URL
+  credentials: true
+}));
+
   app.use(express.json());
 
   app.get('/', (req, res) => res.send("API is working"));
