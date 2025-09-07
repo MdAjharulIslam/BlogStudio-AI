@@ -10,19 +10,8 @@ const app = express();
 
 (async () => {
   await connectDB();
-  // Allowed origins for CORS
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://blog-studio-ai.vercel.app'
-  
-];
 
-
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
-}));
-
+  app.use(cors());
   app.use(express.json());
 
   app.get('/', (req, res) => res.send("API is working"));
