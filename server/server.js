@@ -15,10 +15,7 @@ const _dirname = path.resolve();
 
 (async () => {
   await connectDB();
-app.use((req, res, next) => {
-  console.log("Incoming request path:", req.path);
-  next();
-});
+
 
   app.use(cors());
   app.use(express.json());
