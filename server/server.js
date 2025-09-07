@@ -9,10 +9,16 @@ import path from 'path';
 
 const app = express();
 
+
+
 const _dirname = path.resolve();
 
 (async () => {
   await connectDB();
+app.use((req, res, next) => {
+  console.log("Incoming request path:", req.path);
+  next();
+});
 
   app.use(cors());
   app.use(express.json());
@@ -26,7 +32,7 @@ const _dirname = path.resolve();
 
 
   app.use(express.static(path.join(_dirname, "/client/dist" )))
-  app.get('*', (_,res)=>{
+  app.get('/*splat', (_,res)=>{
     res.sendFile(path.resolve(_dirname, "client", "dist", "index.html"));
   })
 
