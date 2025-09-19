@@ -7,7 +7,7 @@ import { useAppContext } from "../context/AppContext";
 const BlogList = () => {
   const [menu, setMenu] = useState("All");
 
-  const { blogs, input } = useAppContext();
+  const { blogs, input, loading } = useAppContext();
 
   const filteredBlogs = () => {
     if (input === "") {
@@ -43,12 +43,17 @@ const BlogList = () => {
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 md-24 mx-8 sm:mx-16 xl:mx-40">
-        {filteredBlogs()
-          .filter((blog) => (menu === "All" ? true : blog.category === menu))
-          .map((blog) => (
-            <BlogCard key={blog._id} blog={blog} />
-          ))}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 md-24 mx-8 sm:mx-16 xl:mx-40">
+        {loading ? (
+          // ✅ Only this section shows loading, rest of UI stays visible
+          <p className="col-span-full text-center text-gray-500">Loading blogs...</p>
+        ) : filteredBlogs().filter((blog) => menu === "All" || blog.category === menu).length > 0 ? (
+          filteredBlogs()
+            .filter((blog) => (menu === "All" ? true : blog.category === menu))
+            .map((blog) => <BlogCard key={blog._id} blog={blog} />)
+        ) : (
+          <p className="col-span-full text-center text-gray-400">No blogs found.</p>
+        )}
       </div>
     </div>
   );

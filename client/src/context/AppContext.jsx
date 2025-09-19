@@ -13,17 +13,22 @@ export const AppProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [blogs, setBlogs] = useState([]);
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(true);
 
- const fetchBlogs = async ()=>{
-
-  try {
-    const {data} =await axios.get('/api/blog/all');
-    data.success ? setBlogs (data.blogs): toast.error(data.message)
-  } catch (error) {
-    toast.error(error.message)
-  }
- }
-
+  const fetchBlogs = async () => {
+    try {
+      const { data } = await axios.get("/api/blog/all");
+      if (data.success) {
+        setBlogs(data.blogs);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false); 
+    }
+  };
  useEffect (()=>{
  fetchBlogs();
 
@@ -34,7 +39,7 @@ export const AppProvider = ({ children }) => {
  }
  },[])
 
-
+ 
   const value = {
     axios,
     navigate,
@@ -45,6 +50,7 @@ export const AppProvider = ({ children }) => {
     input,
     setInput,
   };
+
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
