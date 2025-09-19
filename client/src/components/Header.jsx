@@ -25,8 +25,8 @@ const Header = () => {
           <img src={assets.star_icon} className="w-2.5" alt="" />
         </div>
         <h1 className="text-3xl sm:text-6xl font-semibold sm:leading-16 text-gray-700">
-          Your own <span className="text-primary">blogging</span> <br />
-          platform.
+          Your      <span className="text-primary">voice, Amplified</span> <br />
+          by AI revolution.
         </h1>
 
         <p className="my-6 sm-my-8 max-w-2xl m-auto max-sm:text-xs text-gray-500">
