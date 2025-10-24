@@ -46,7 +46,7 @@ const BlogList = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 md-24 mx-8 sm:mx-16 xl:mx-40">
         {loading ? (
           
-          <p className="col-span-full text-center text-gray-500">Loading blogs...</p>
+          <p className="col-span-full text-center text-gray-500">Loading blogs upto 20s becuse of cold start...</p>
         ) : filteredBlogs().filter((blog) => menu === "All" || blog.category === menu).length > 0 ? (
           filteredBlogs()
             .filter((blog) => (menu === "All" ? true : blog.category === menu))
